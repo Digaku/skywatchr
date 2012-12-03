@@ -6,6 +6,12 @@ import kafka.consumer.{KafkaListener, ConsumerConfig}
 
 object SkyWatchr {
     def main(args:Array[String]){
+        
+        if(args.length == 0){
+            println("Usage: java -jar skywatchr.jar [CHANNEL]")
+            return
+        }
+        
         val props = new Properties()
         props.put("zk.connect", "localhost:2181")
         props.put("groupid", "group01")

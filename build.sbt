@@ -1,3 +1,5 @@
+import AssemblyKeys._
+
 organization := "com.ansvia.skywatchr"
 
 name := "skywatchr"
@@ -9,6 +11,8 @@ scalaVersion := "2.9.1"
 crossPaths := false
 
 seq(ProguardPlugin.proguardSettings :_*)
+
+assemblySettings
 
 proguardOptions ++= Seq(
     keepMain("com.ansvia.skywatchr.SkyWatchr"),
@@ -26,10 +30,15 @@ proguardOptions ++= Seq(
     "-keepclassmembers class * extends ch.qos.logback.core.encoder.EncoderBase<E> { *; }",
     "-keep class kafka.consumer.ZookeeperConsumerConnector",
     "-keepclassmembers class kafka.consumer.ZookeeperConsumerConnector { *; }",
+    "-keep class kafka.*",
+    "-keepclassmembers class kafka.* { *; }",
     "-keep class kafka.utils.Log4jController",
     "-keepclassmembers class kafka.utils.Log4jController { *; }",
-    "-keep public class javax.management.*"
-    "-keepnames public class javax.management.*"
+    "-keep public class javax.management.*",
+    "-keepnames public class javax.management.*",
+    "-keepclassmembers class javax.* { *; }",
+    "-keep class * implements *MBean",
+    "-keepclassmembers class *MBean { *; }"
     )
 
 resolvers ++= Seq(
