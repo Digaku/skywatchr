@@ -5,8 +5,8 @@ import java.util.Properties
 import kafka.consumer.{KafkaListener, ConsumerConfig}
 
 object SkyWatchr {
-  
-    
+
+    private lazy val ERROR_RE = """\[ERROR.*?\]""".r
   
     def getArg(args:Array[String],key:String):Option[String] = {
       var i = 0
@@ -68,8 +68,11 @@ object SkyWatchr {
         })
 
         cons.listen(args: _*){ d =>
-            
-            println(d.topic + " | " + d.message)
+            if(ERROR_RE.findFirstIn(d.message).isDefined){
+                println("\\e[0;31m" + d.topic + " | " + d.message + "\\e[0m")
+            }else{
+                println(d.topic + " | " + d.message)
+            }
         }
     }
 }

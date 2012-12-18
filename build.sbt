@@ -48,7 +48,7 @@ resolvers ++= Seq(
 )
 
 libraryDependencies ++= Seq(
-    "kafka" % "kafka-core" % "0.7.2",
+    "kafka" % "kafka-core" % "0.7.2" excludeAll(ExclusionRule(organization="javax.jms"),ExclusionRule(organization="com.sun.jdmk"),ExclusionRule(organization="com.sun.jmx")),
 	"ch.qos.logback" % "logback-classic" % "1.0.7",
 	"ch.qos.logback" % "logback-core" % "1.0.7",
 	"org.slf4j" % "slf4j-api" % "1.6.6"
