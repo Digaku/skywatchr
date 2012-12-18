@@ -6,6 +6,8 @@ import kafka.consumer.{KafkaListener, ConsumerConfig}
 
 object SkyWatchr {
   
+    
+  
     def getArg(args:Array[String],key:String):Option[String] = {
       var i = 0
       var rv:Option[String] = None
@@ -66,7 +68,8 @@ object SkyWatchr {
         })
 
         cons.listen(args: _*){ d =>
-          println(d.topic + " | " + d.message)
+            
+            println(d.topic + " | " + d.message)
         }
     }
 }
